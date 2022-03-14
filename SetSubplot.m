@@ -21,10 +21,9 @@ end
 
 %% Main Function Call
    str_cells = fieldnames(fig_handle);
-
+    u = 1;
 for i = 1:length(fieldnames(fig_handle))
-   u = 1;
-
+   
    CurrFig_str = strcat('fig_handle.',str_cells{i}); 
    eval(strcat('figure(',strcat(CurrFig_str,');')));
 
@@ -38,8 +37,8 @@ for i = 1:length(fieldnames(fig_handle))
        hold on; grid on; legend;
        u = u + 1;
    end
-linkaxes(axes,'x')
-end
 
+end
+linkaxes(axes,'x')
 end
 

@@ -20,6 +20,7 @@ axes = SetSubplot(fig_handle,subplot_config);
 figure(fig_handle.Pitch);
 subplot(3,1,2);
 plot([1:100],[101:200],'DisplayName','Pitch Rate 1','LineStyle','--');
+xlim([1 100])
 subplot(3,1,3);
 plot([1:100],[1:100]*23,'DisplayName','DE 1','Color','r');
 
