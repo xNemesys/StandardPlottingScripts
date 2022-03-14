@@ -38,8 +38,8 @@ for i = 1:length(fieldnames(fig_handle))
        hold on; grid on; legend;
        u = u + 1;
    end
-
-end
 linkaxes(axes,'x')
+end
+
 end
 
