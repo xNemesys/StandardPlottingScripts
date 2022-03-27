@@ -8,8 +8,9 @@ xlabel = {'Time [s]','Time [s]','Time [s]'}';
 ylabel = {'Roll Angle [deg]','Roll Rate [deg/s]','DA [deg]'}';
 xlim = [-inf,inf;-inf,inf;-inf,inf];
 ylim = [-inf,inf;-inf,inf;-inf,inf];
-fig.roll.subplot = table(title,xlabel,ylabel,xlim,ylim);
-clear xlabel ylabel title xlim ylim
+linkX = [1;1;1];
+fig.roll.subplot = table(title,xlabel,ylabel,xlim,ylim,linkX);
+clear xlabel ylabel title xlim ylim linkX
 
 %% Pitch
 fig.pitch.flag = 1;
@@ -21,8 +22,9 @@ xlabel = {'Time [s]','Time [s]','Time [s]'}';
 ylabel = {'Pitch Angle [deg]','Pitch Rate [deg/s]','DE [deg]'}';
 xlim = [-inf,inf;-inf,inf;-inf,inf];
 ylim = [-inf,inf;-inf,inf;-inf,inf];
-fig.pitch.subplot = table(title,xlabel,ylabel,xlim,ylim);
-clear xlabel ylabel title xlim ylim
+linkX = [1;1;1];
+fig.pitch.subplot = table(title,xlabel,ylabel,xlim,ylim,linkX);
+clear xlabel ylabel title xlim ylim linkX
 
 %% Overview
 fig.overview.flag = 1;
@@ -44,18 +46,22 @@ xlim = [-inf,inf;-inf,inf;-inf,inf...
 ylim = [-inf,inf;-inf,inf;-inf,inf...
     ;-inf,inf;-inf,inf;-inf,inf...
     ;-inf,inf;-inf,inf;-inf,inf];
-fig.overview.subplot = table(title,xlabel,ylabel,xlim,ylim);
-clear xlabel ylabel title xlim ylim
+linkX = [1;1;1;
+         1;1;1;
+         1;1;1];
+fig.overview.subplot = table(title,xlabel,ylabel,xlim,ylim,linkX);
+clear xlabel ylabel title xlim ylim linkX
 
-%% Single
-fig.single.flag = 1;
-fig.single.figname = 'Single';
-fig.single.subplot_config = [1 1];
+%% North - East
+fig.latlon.flag = 1;
+fig.latlon.figname = 'North-East';
+fig.latlon.subplot_config = [1 1];
 
 title = {''}';
-xlabel = {'X Label'}';
-ylabel = {'Y Label'}';
+xlabel = {'Latitude'}';
+ylabel = {'Longitude'}';
 xlim = [-inf,inf];
 ylim = [-inf,inf];
-fig.single.subplot = table(title,xlabel,ylabel,xlim,ylim);
-clear xlabel ylabel title xlim ylim
+linkX = [0]; % Purposely did not link this x-axis because its not time
+fig.latlon.subplot = table(title,xlabel,ylabel,xlim,ylim,linkX);
+clear xlabel ylabel title xlim ylim linkX

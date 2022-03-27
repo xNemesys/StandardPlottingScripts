@@ -4,7 +4,7 @@ addpath(genpath('..'))
 
 %% Write Fig Config and Call Figure
 FigureConfig;
-[fig,axes] = setFigure(fig,1098);
+fig = SetFigure(fig,1098);
 
 %% Plot
 
