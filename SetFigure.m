@@ -1,27 +1,57 @@
-function [fig_handle,fig_num] = SetFigure(figure_name,first_idx)
-% Author: Khoo Yi Shao
-% Opens up clean figure according to figure_name
+function [fig,axes] = setFigure(fig,first_idx)
 %
-% Benefits: 
-% 1) Function does not need to know how many figure to plot
-% 2) fig_num.name returns figure number
-% 3) Set the figure name and style
-% 4) fig_handle allows you to point back to the defined figure
+% Example: example_setFigure.m
+%
+% Description: 
+% This function helps to set the REQUIRED figures
+% By default, the figure will be docked with no number title
+% Figure name will be displayed, with each of the subplots labeled
 % 
-% Notes:
-% 1) When calling subplot out of fcn, re-call hold,grid,legend
+% Inputs:
+% A figure structure with the config of each plots and subplot is required.
+% Refer to FigureConfig.m for example
+% 
 
-    for u = first_idx : first_idx + length(figure_name)-1
-    
-        % Set i to start from 1
-        i = u-first_idx+1; 
-        % fig_num.Roll = 101; - for example only
-        eval(strcat(strcat('fig_num.',figure_name{i}),' = u;'));
-        % fig_handle.Roll = figure(figure_number);
-        eval(strcat(strcat('fig_handle.',figure_name{i}),'= figure(u);')); 
+fig_cell = struct2cell(fig);
+fig_fields = fieldnames(fig);
+u = 1;
 
-        set(figure(u),'Name',figure_name{i},'WindowStyle','docked','NumberTitle','off');
-        clf; hold on; grid on; legend;
-    end 
+for i = 1:length(fig_cell)
 
+    if(fig_cell{i}.flag == 1)
+        %% Create figure
+        fig_num = first_idx + i - 1;
+
+        % fig.roll.num = 100;
+        expression = strcat('fig.',fig_fields(i),'.num',' = fig_num;');
+        eval(expression{:});
+        % fig.roll.handle = figure(fig_num);
+        expression = strcat('fig.',fig_fields(i),'.handle','= figure(fig_num);');
+        eval(expression{:});
+
+        set(figure(fig_num),'Name',fig_cell{i}.figname,'WindowStyle','docked','NumberTitle','off');
+        clf;
+
+        %% Create subplot
+        
+        subplot_config = fig_cell{i}.subplot_config;
+        row = subplot_config(1);
+        column = subplot_config(2);
+        subplot_table = fig_cell{i}.subplot;
+        for ii = 1:(row*column)
+
+            axes(u) = subplot(row,column,ii);
+            hold on; grid on; legend;
+            str = subplot_table.title(ii); title(str);
+            str = subplot_table.xlabel(ii); xlabel(str);
+            str = subplot_table.ylabel(ii); ylabel(str);
+            xlim(subplot_table.xlim(ii,:));
+            ylim(subplot_table.ylim(ii,:));
+
+            u = u+1;
+        end
+    end
+
+end
+linkaxes(axes,'x');
 end

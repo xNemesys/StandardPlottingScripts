@@ -1,30 +1,25 @@
 clc; clear; close all;
 
-addpath('..')
+addpath(genpath('..'))
 
-%% Config
-figure_name = {'Roll','Pitch','Yaw'}';
-figure_num = 101;
-
-%% Function
-
-[fig_handle,fig_num] = SetFigure(figure_name,figure_num);
+%% Write Fig Config and Call Figure
+FigureConfig;
+[fig,axes] = setFigure(fig,1098);
 
 %% Plot
 
-figure(fig_handle.Pitch);
-subplot(3,3,1);hold on; grid on; legend();
-plot((1:100),(101:200),'DisplayName','FirstPlot')
+% Below are just some examples of plotting with legends
 
-% Intentionally points away from the pitch figure and points back
-% to demonstrate the benefits of having the figure handle
-% 
-% Does not need to redefine hold on; grid on;
-% Can overlay plots easily
-%
+if(fig.pitch.flag == 1);
+    figure(fig.pitch.handle)
+    subplot(3,1,2);
+    plot([1:100],[101:200],'DisplayName','Pitch Rate 1','LineStyle','--');
+    subplot(3,1,3);
+    plot([1:100],[1:100]*23,'DisplayName','DE 1','Color','r');
+end
 
-figure(fig_handle.Roll);
-subplot(3,3,5);hold on; grid on; legend();
-plot((1:100),(101:200),'DisplayName','RollPlot')
-figure(fig_handle.Pitch); subplot(3,3,1);
-plot((1:100),(201:300),'DisplayName','SecondPlot')
+if(fig.roll.flag ==1)
+    figure(fig.roll.handle);
+    subplot(3,1,1);
+    plot([1:100],[101:200],'DisplayName','Roll Angle 1','LineWidth',0.9);
+end
