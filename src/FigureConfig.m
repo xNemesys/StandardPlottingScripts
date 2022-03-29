@@ -1,3 +1,15 @@
+%% Comments
+%
+% Do not add unecessary field into fig. because the for-loop checks for 
+% the number of field in fig structure
+% 
+% Based on the number of subplot in each figure, the array of the 
+% xlabel,ylabel,title,xlim,ylim have to change accordingly
+%
+% [-inf,inf] will allow the plot to be set to default scale
+%
+
+
 %% Roll
 fig.roll.flag = 1;
 fig.roll.figname = 'Roll AP';

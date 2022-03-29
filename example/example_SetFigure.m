@@ -3,12 +3,14 @@ clc; clear; close all;
 addpath(genpath('..'))
 
 %% Write Fig Config and Call Figure
-FigureConfig;
+FigureConfig; % Please take reference from this file for "fig"
+fig.pitch.flag = 0; % Disable pitch plots
 fig = SetFigure(fig,1098);
 
-%% Plot
+%% Get Plot Colours
+plotColours = getPlotColours; % Sometimes ran out of colour from 'r' 'k', so decided to make this
 
-% Below are just some examples of plotting with legends
+%% Plot
 
 if(fig.pitch.flag == 1);
     figure(fig.pitch.handle)
@@ -22,4 +24,12 @@ if(fig.roll.flag ==1)
     figure(fig.roll.handle);
     subplot(3,1,1);
     plot([1:100],[101:200],'DisplayName','Roll Angle 1','LineWidth',0.9);
+end
+
+if(fig.overview.flag ==1)
+    figure(fig.overview.handle);
+    subplot(3,3,1);
+    plot([1:100],[101:200],'DisplayName','Roll Angle 1',LineWidth=0.9);
+    subplot(3,3,4);
+    plot([1:100],[101:200],'DisplayName','Pitch Angle 1','Color',plotColours{5});
 end
